@@ -34,44 +34,9 @@ public class AddressResource {
     @Autowired
     private AddressBiz addressBiz;
 
-    @POST
-    @Path(ScoreConstants.Route.Address.ADD)
-    public Response addAddress(@NotEmpty @FormParam("provinceCode") String provinceCode, @NotEmpty @FormParam("cityCode") String cityCode,
-                               @FormParam("areaCode") String areaCode, @NotEmpty @FormParam("address") String address,
-                               @NotEmpty @FormParam("receiverName") String receiverName, @NotEmpty @FormParam("phone") String phone,
-                               @FormParam("postcode") String postcode, @FormParam("isDefault") boolean isDefault){
-        String userId = null;
-        try {
-            AddressDO addressDO = new AddressDO();
-            addressDO.setUserId(userId);
-            addressDO.setIsDeleted(false);
-            addressDO.setAddress(address);
-            addressDO.setProvinceCode(provinceCode);
-            addressDO.setCityCode(cityCode);
-            addressDO.setAreaCode(areaCode);
-            addressDO.setReceiverName(receiverName);
-            addressDO.setPhone(phone);
-            addressDO.setPostcode(postcode);
-            addressDO.setIsDefault(isDefault);
-            Date time = Calendar.getInstance().getTime();
-            addressDO.setCreateTime(time);
-            addressDO.setUpdateTime(time);
-            ScoreProvider.addressService.addAddressDO(addressDO);
-            JSONObject jsonObject = new JSONObject();
-            jsonObject.put("addressId", addressDO.getId());
-            return TxJerseyTools.returnSuccess(jsonObject.toJSONString());
-        } catch (AddressException e){
-            logger.error("====>addAddress exception", e.getCode());
-            return CustomAck.customError(e.getMessage());
-        } catch (Exception e) {
-            logger.error("====>addAddress exception", e);
-            return TxJerseyTools.returnAbort(CommonConstants.ErrorCode.ERROR_SERVICE_IN_REST);
-        }
-
-    }
     @GET
     @Path("address")
-    public void test(){
+    public int test(){
         Address address = new Address();
         address.setUserId("userId1");
         address.setProvinceCode("00");
@@ -90,7 +55,7 @@ public class AddressResource {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+      return '0';
     }
 
 }
