@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.trc.biz.impl.consumer.AddressBiz;
 import org.trc.constants.ScoreConstants;
 import org.trc.domain.consumer.Address;
+import org.trc.interceptor.Admin;
 import org.trc.util.CommonConstants;
 import org.trc.util.CustomAck;
 import org.trc.util.TxJerseyTools;
@@ -17,6 +18,7 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.Calendar;
 import java.util.Date;
@@ -27,7 +29,6 @@ import java.util.Date;
  */
 @Component
 @Path("test")
-
 public class AddressResource {
 
     private Logger logger = LoggerFactory.getLogger(AddressResource.class);
@@ -36,11 +37,12 @@ public class AddressResource {
 
     @GET
     @Path("address")
-    public int test(){
+    @Admin
+    public Response test(){
         Address address = new Address();
-        address.setUserId("userId1");
-        address.setProvinceCode("00");
-        address.setCityCode("11");
+        address.setUserId("201512040929176188868d2365cd444ca833046f944178d97");
+        address.setProvinceCode("110000");
+        address.setCityCode("110114");
         address.setAreaCode("22");
         address.setAddress("北京市");
         address.setReceiverName("zhangsan");
@@ -55,7 +57,8 @@ public class AddressResource {
         } catch (Exception e) {
             e.printStackTrace();
         }
-      return '0';
+        String json = "{\"success\":\"200\"}";
+      return Response.status(Response.Status.OK).entity(json).type(MediaType.APPLICATION_JSON).encoding("UTF-8").build();
     }
 
 }
