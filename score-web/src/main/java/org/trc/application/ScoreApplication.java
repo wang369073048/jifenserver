@@ -10,7 +10,7 @@ import org.glassfish.jersey.server.ResourceConfig;
 public class ScoreApplication extends ResourceConfig{
 
     public ScoreApplication(){
-
+        //test test
         register(JacksonJsonProvider.class);
         register(MultiPartFeature.class);
         packages("org.trc.resource");
