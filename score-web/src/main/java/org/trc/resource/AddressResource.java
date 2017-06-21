@@ -43,6 +43,7 @@ public class AddressResource {
         address.setUserId("201512040929176188868d2365cd444ca833046f944178d97");
 
 
+        
         address.setProvinceCode("110000");
         address.setCityCode("110114");
         address.setAreaCode("22");
