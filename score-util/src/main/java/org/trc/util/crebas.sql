@@ -120,7 +120,7 @@ create table activity_prizes
    winning_probability   int(11) not null comment '中奖几率:单位/万分之一',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
-   primary key (id)
+   primary key (activity_prizes_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='活动奖品信息表';
 
@@ -142,7 +142,7 @@ create table address
    is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
-   primary key (id)
+   primary key (address_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='地址表';
 
@@ -157,7 +157,7 @@ create table area
    city                 varchar(40) not null,
    district             varchar(40) not null,
    parent               bigint(20) not null,
-   primary key (id)
+   primary key (area_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='省市区表';
 
@@ -179,7 +179,7 @@ create table banner
    is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
-   primary key (id)
+   primary key (banner_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='banner表';
 
@@ -198,7 +198,7 @@ create table banner_content
    is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
-   primary key (id)
+   primary key (banner_content_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='banner内容页';
 
@@ -219,7 +219,7 @@ create table barrage
    is_deleted            tinyint(1) not null default 0 comment '0 正常 ;1 已删除',
    create_time           timestamp default CURRENT_TIMESTAMP comment '创建时间',
    update_time           timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
-   primary key (id)
+   primary key (barrage_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='弹幕表';
 
@@ -240,7 +240,7 @@ create table card_coupons
    valid_end_time         timestamp default NULL comment '有效结束日期',
    create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
-   primary key (id),
+   primary key (card_coupons_id),
    unique key unq_batch_number (batch_number)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='卡券信息表';
@@ -259,7 +259,7 @@ create table card_item
    order_num             varchar(64) default NULL,
    create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
    release_time          timestamp default NULL comment '发放时间',
-   primary key (id),
+   primary key (card_item_id),
    unique key unq_code (code)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='卡券明细表';
@@ -276,7 +276,7 @@ create table card_item_abandoned
    state                int(11) not null comment '状态(0:未发放，1:已发放)',
    create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
    abandoned_time        timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '废弃时间',
-   primary key (id)
+   primary key (card_item_abandoned_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='废弃卡券明细表';
 
@@ -300,7 +300,7 @@ create table category
    is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
-   primary key (id)
+   primary key (category_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='类目表';
 
@@ -317,7 +317,7 @@ create table consumption_summary
    exchange_in_num        bigint(20) not null comment '兑入积分数量',
    consume_num           bigint(20) not null comment '消费积分数量',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
-   primary key (id)
+   primary key (consumption_summary_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='消费汇总';
 
@@ -349,7 +349,7 @@ create table exchange_rate
    channel_everyday_out_limit bigint(20) default NULL comment '渠道每天可兑出限额（可兑换的外币数量）',
    is_deleted            tinyint(1) not null comment '删除标示',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
-   primary key (id)
+   primary key (exchange_rate_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分转换';
 
@@ -370,7 +370,7 @@ create table exchange_rate_history
    channel_everyday_in_limit bigint(20) default NULL comment '渠道每天可兑入限额（可兑换的外币数量）',
    channel_everyday_out_limit bigint(20) default NULL comment '渠道每天可兑出限额（可兑换的外币数量）',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
-   primary key (id)
+   primary key (exchange_rate_history_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分转换';
 
@@ -410,7 +410,7 @@ create table goods
    snapshot_time         timestamp not null default '2017-01-01 00:00:00' comment '快照时间',
    create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
-   primary key (id),
+   primary key (goods_id),
    unique key unq_goods_sn (goods_sn),
    unique key unq_shop_id_barcode (shop_id, barcode)
 )
@@ -428,7 +428,7 @@ create table goods_recommend
    is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
-   primary key (id)
+   primary key (goods_recommend_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商品推荐表';
 
@@ -460,7 +460,7 @@ create table goods_snapshot
    valid_start_time       timestamp default NULL comment '有效开始日期',
    valid_end_time         timestamp default NULL comment '有效结束日期',
    create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
-   primary key (id),
+   primary key (goods_snapshot_id),
    unique key unq_goods_id_version (goods_id, version)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -479,7 +479,7 @@ create table log_information
    params               varchar(2048) comment '内容',
    remark               varchar(512) comment '备注',
    operate_time          timestamp not null comment '操作时间',
-   primary key (id)
+   primary key (log_information_id)
 );
 
 alter table log_information comment '日志信息表';
@@ -494,7 +494,7 @@ create table logistic_code
    company_name          varchar(32) not null,
    create_time           timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
    update_time           timestamp default CURRENT_TIMESTAMP,
-   primary key (id)
+   primary key (logistic_code_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
@@ -554,7 +554,7 @@ create table manager
    is_deleted            tinyint(1) not null default 0 comment '删除标志',
    create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
-   primary key (id)
+   primary key (manager_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='管理员表';
 
@@ -570,7 +570,7 @@ create table membership_score_daily_details
    consume_num           bigint(20) not null comment '消费积分数量',
    balance              bigint(20) not null comment '积分结余',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
-   primary key (id)
+   primary key (membership_score_daily_details_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='会员积分日结明细';
 
@@ -596,7 +596,7 @@ create table notice
    is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
-   primary key (id)
+   primary key (notice_id)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='公告表';
 
@@ -615,7 +615,7 @@ create table order_address
    phone                varchar(16) not null comment '联系人手机号',
    postcode             varchar(12) default NULL comment '邮编',
    create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
-   primary key (id)
+   primary key (order_address_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='订单地址表';
 
@@ -629,7 +629,7 @@ create table order_locus
    before_status         tinyint(4) not null comment '变更前状态',
    after_status          tinyint(4) not null comment '变更后状态',
    create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
-   primary key (id)
+   primary key (order_locus_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='订单轨迹表\r\n';
 
@@ -662,7 +662,7 @@ create table orders
    delivery_time         timestamp default NULL comment '发货时间',
    confirm_time          timestamp default NULL comment '确认收货时间',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
-   primary key (id),
+   primary key (orders_id),
    unique key unq_order_num (order_num)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='订单表';
@@ -702,7 +702,7 @@ create table participation_record
    expenditure          int(11) not null comment '积分消费',
    request_no            varchar(32) not null comment '请求编号',
    whether_winning       tinyint(4) not null comment '是否中奖:0-未中奖 1-中奖',
-   primary key (id)
+   primary key (participation_record_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='参与记录信息表';
 
@@ -721,7 +721,7 @@ create table request_flow
    response_result       varchar(2048) not null comment '应答',
    request_time          timestamp not null comment '请求时间',
    remark               varchar(512) comment '备注',
-   primary key (id)
+   primary key (request_flow_id)
 );
 
 alter table request_flow comment '请求流水表';
@@ -740,7 +740,7 @@ create table resource
    is_deleted            varchar(2) comment '是否删除:0-否,1-是',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间,格式yyyy-mm-dd hh:mi:ss',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '最后更新时间,格式yyyy-mm-dd hh:mi:ss',
-   primary key (id)
+   primary key (resource_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='权限表';
 
@@ -757,7 +757,7 @@ create table role
    is_deleted            tinyint(1) comment '是否删除:0-否,1-是',
    create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建时间,格式yyyy-mm-dd hh:mi:ss',
    update_time          timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '最后更新时间,格式yyyy-mm-dd hh:mi:ss',
-   primary key (id)
+   primary key (role_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='角色表';
 
@@ -771,7 +771,7 @@ create table role_resource_relation
    resource_id           bigint(20) not null comment '权限id',
    create_operator       varchar(32) comment '创建操作人',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间,格式yyyy-mm-dd hh:mi:ss',
-   primary key (id)
+   primary key (role_resource_relation_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='角色权限关系表';
 
@@ -792,7 +792,7 @@ create table score
    accumulative_score    bigint(20) not null comment '累计积分获取',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
-   primary key (id)
+   primary key (score_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分账户表';
 
@@ -810,7 +810,7 @@ create table score_auth
    contacts_user         varchar(32) default NULL,
    is_deleted            tinyint(1) not null default 0 comment '删除标志',
    create_time           timestamp not null default '2017-01-01 00:00:00' comment '操作时间',
-   primary key (id)
+   primary key (score_auth_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分权限表';
 
@@ -839,7 +839,7 @@ create table score_change
    operation_time        timestamp not null comment '操作时间',
    expiration_time       timestamp comment '该笔变更积分过期时间',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
-   primary key (id)
+   primary key (score_change_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分变更表';
 
@@ -859,7 +859,7 @@ create table score_change_detail
    expiration_time       timestamp not null comment '该笔变更积分过期时间',
    flow_type             varchar(32) not null comment '变更类型(income:收入，expenditure:支出,freeze:冻结)',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
-   primary key (id)
+   primary key (score_change_detail_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分变更明细';
 
@@ -878,7 +878,7 @@ create table score_child
    is_deleted            tinyint(1) not null comment '删除标示',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
-   primary key (id)
+   primary key (score_child_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分子表，含有效期处理';
 
@@ -898,7 +898,7 @@ create table score_converter_flow
    channel_everyday_out_limit bigint(20) default NULL comment '渠道每天可兑出限额(可兑换的外币数量)',
    operated_by           varchar(32) not null comment '操作人',
    operated_time         timestamp not null default '2017-01-01 00:00:00' comment '操作时间',
-   primary key (id)
+   primary key (score_converter_flow_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分转换规则设置流水';
 
@@ -916,8 +916,11 @@ create table score_exchange_flow
    state                varchar(32),
    message              varchar(512),
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建者',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
-   primary key (id)
+   update_by             varchar(64) default NULL comment '修改者',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   primary key (score_exchange_flow_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='积分兑入兑出流水';
 
@@ -931,7 +934,7 @@ create table score_settlement
    daily_balance         bigint(20) not null comment '日结余额',
    account_day           varchar(12) not null comment '记账日',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
-   primary key (id)
+   primary key (score_settlement_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商家账户积分日结信息表';
 
@@ -947,7 +950,7 @@ create table score_user
    is_valid              tinyint(1) comment '是否有效:0-无效;1-有效',
    create_time           timestamp default CURRENT_TIMESTAMP comment '创建时间',
    update_time           timestamp,
-   primary key (id)
+   primary key (score_user_id)
 );
 
 alter table score_user comment '用户表';
@@ -972,7 +975,7 @@ create table settlement
    settlement_time       timestamp default NULL comment '结算时间',
    settlement_state      int(11) not null comment '结算状态：0、未结算；1、已结算',
    create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
-   primary key (id)
+   primary key (settlement_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='结算信息表';
 
@@ -993,7 +996,7 @@ create table shop
    is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
-   primary key (id)
+   primary key (shop_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='店铺';
 
@@ -1009,7 +1012,7 @@ create table shopwindow
    sort                 int(1) default NULL comment '排序',
    create_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '创建时间',
    update_time           timestamp default NULL,
-   primary key (id)
+   primary key (shopwindow_id)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='橱窗表';
 
@@ -1023,7 +1026,7 @@ create table user_role_relation
    user_id               varchar(64) comment '用户Id',
    role_id               bigint(20) not null comment '角色id',
    create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建时间,格式yyyy-mm-dd hh:mi:ss',
-   primary key (id)
+   primary key (user_role_relation_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户角色关系表';
 
@@ -1056,7 +1059,7 @@ create table winning_record
    state                tinyint(4) not null comment '奖品状态:0-未发放1-已发放2-发放失败',
    version              int(11) not null comment '版本号',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
-   primary key (id)
+   primary key (winning_record_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='中奖记录信息表';
 
