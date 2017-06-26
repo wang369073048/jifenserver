@@ -118,8 +118,11 @@ create table activity_prizes
    winning_times         int(11) default NULL comment '中奖次数限制',
    winning_type          varchar(32) default NULL comment '中奖次数限制类型:PER_DAY每天,THE_WHOLE_ACTIVITY全程',
    winning_probability   int(11) not null comment '中奖几率:单位/万分之一',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
-   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (activity_prizes_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='活动奖品信息表';
@@ -140,8 +143,10 @@ create table address
    postcode             varchar(12) default NULL comment '邮编',
    is_default            tinyint(1) not null comment '0 非默认 ;1 默认',
    is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
-   create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (address_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='地址表';
@@ -157,6 +162,11 @@ create table area
    city                 varchar(40) not null,
    district             varchar(40) not null,
    parent               bigint(20) not null,
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (area_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='省市区表';
@@ -177,8 +187,10 @@ create table banner
    sort                 int(11) default NULL comment '排序',
    description          varchar(128) default NULL,
    is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
-   create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (banner_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='banner表';
@@ -196,8 +208,10 @@ create table banner_content
    target_url            varchar(128) not null comment '跳转url',
    description          varchar(128) not null comment '备注',
    is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
-   create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (banner_content_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='banner内容页';
@@ -216,9 +230,11 @@ create table barrage
    original_phone        varchar(32) default NULL comment '原手机号(不带*的)',
    goods_name            varchar(64) default NULL comment '商品名称',
    content              text comment '内容',
-   is_deleted            tinyint(1) not null default 0 comment '0 正常 ;1 已删除',
-   create_time           timestamp default CURRENT_TIMESTAMP comment '创建时间',
-   update_time           timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (barrage_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='弹幕表';
@@ -235,11 +251,13 @@ create table card_coupons
    batch_number          varchar(32) not null comment '批次号',
    stock                int(11) not null comment '库存',
    version              bigint(20) not null comment '版本号，并发乐观锁，初始版本1，更新+1',
-   is_deleted            tinyint(1) not null comment '状态(0:未删除的，1:被删除)',
    valid_start_time       timestamp default NULL comment '有效开始日期',
    valid_end_time         timestamp default NULL comment '有效结束日期',
-   create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (card_coupons_id),
    unique key unq_batch_number (batch_number)
 )
@@ -257,8 +275,12 @@ create table card_item
    state                int(11) not null comment '状态(0:未发放，1:已发放)',
    user_id               varchar(64) default NULL comment '用户id',
    order_num             varchar(64) default NULL,
-   create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
    release_time          timestamp default NULL comment '发放时间',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (card_item_id),
    unique key unq_code (code)
 )
@@ -274,8 +296,12 @@ create table card_item_abandoned
    batch_number          varchar(32) not null comment '批次号',
    code                 varchar(32) not null comment '券码',
    state                int(11) not null comment '状态(0:未发放，1:已发放)',
-   create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
    abandoned_time        timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '废弃时间',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (card_item_abandoned_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='废弃卡券明细表';
@@ -298,8 +324,10 @@ create table category
    description          varchar(255) default NULL comment '备注',
    operator_user_id       varchar(64) not null comment '操作人ID',
    is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
-   create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (category_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='类目表';
@@ -316,7 +344,11 @@ create table consumption_summary
    phone                varchar(16) not null comment '会员手机号',
    exchange_in_num        bigint(20) not null comment '兑入积分数量',
    consume_num           bigint(20) not null comment '消费积分数量',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (consumption_summary_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='消费汇总';
@@ -347,8 +379,11 @@ create table exchange_rate
    person_everyday_out_limit bigint(20) default NULL comment '每人每天可兑出限额（可兑换的外币数量）',
    channel_everyday_in_limit bigint(20) default NULL comment '渠道每天可兑入限额（可兑换的外币数量）',
    channel_everyday_out_limit bigint(20) default NULL comment '渠道每天可兑出限额（可兑换的外币数量）',
-   is_deleted            tinyint(1) not null comment '删除标示',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (exchange_rate_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分转换';
@@ -369,7 +404,11 @@ create table exchange_rate_history
    person_everyday_out_limit bigint(20) default NULL comment '每人每天可兑出限额（可兑换的外币数量）',
    channel_everyday_in_limit bigint(20) default NULL comment '渠道每天可兑入限额（可兑换的外币数量）',
    channel_everyday_out_limit bigint(20) default NULL comment '渠道每天可兑出限额（可兑换的外币数量）',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (exchange_rate_history_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分转换';
@@ -401,15 +440,17 @@ create table goods
    content              mediumtext comment '商品详情介绍',
    version              int(11) not null default 1,
    whether_prizes        tinyint(4) not null default 0 comment '0-非奖品;1-奖品',
-   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    valid_start_time       timestamp default NULL comment '有效开始日期',
    valid_end_time         timestamp default NULL comment '有效结束日期',
    auto_up_time           timestamp default NULL comment '自动上架日期',
    auto_down_time         timestamp default NULL comment '自动下架日期',
    up_time               timestamp default NULL comment '上架时间',
    snapshot_time         timestamp not null default '2017-01-01 00:00:00' comment '快照时间',
-   create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (goods_id),
    unique key unq_goods_sn (goods_sn),
    unique key unq_shop_id_barcode (shop_id, barcode)
@@ -426,8 +467,10 @@ create table goods_recommend
    goods_id              bigint(20) not null comment '商品ID',
    sort                 int(11) default NULL comment '排序',
    is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
-   create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (goods_recommend_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商品推荐表';
@@ -456,10 +499,13 @@ create table goods_snapshot
    content              mediumtext comment '商品详情介绍',
    version              int(11) not null comment '商品版本 ',
    whether_prizes        tinyint(1) comment '是否是奖品,0:不是,1:是',
-   is_deleted            tinyint(1) comment '是否删除,0:否.1:是',
    valid_start_time       timestamp default NULL comment '有效开始日期',
    valid_end_time         timestamp default NULL comment '有效结束日期',
-   create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (goods_snapshot_id),
    unique key unq_goods_id_version (goods_id, version)
 )
@@ -478,7 +524,11 @@ create table log_information
    operator             varchar(64) comment '操作人',
    params               varchar(2048) comment '内容',
    remark               varchar(512) comment '备注',
-   operate_time          timestamp not null comment '操作时间',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (log_information_id)
 );
 
@@ -492,8 +542,11 @@ create table logistic_code
    logistic_code_id                   bigint(20) not null auto_increment,
    company_code          varchar(16) not null,
    company_name          varchar(32) not null,
-   create_time           timestamp default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-   update_time           timestamp default CURRENT_TIMESTAMP,
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (logistic_code_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -509,8 +562,11 @@ create table logistics
    shipper_code          varchar(64) not null comment '物流公司编码',
    logistics_num         varchar(64) not null comment '物流单号',
    freight              int(11) default NULL comment '运费',
-   create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (logistics_id),
    unique key unq_order_id (order_id)
 )
@@ -533,10 +589,12 @@ create table lucky_draw
    daily_draw_limit       int(11) not null comment '每日抽奖次数限制',
    app_background        varchar(255) default NULL comment '客户端背景图片',
    web_background        varchar(255) default NULL comment 'pc端背景图片',
-   is_deleted            tinyint(4) not null default 0 comment '是否删除：0未删除，1已删除',
    activity_rules        varchar(1024) default NULL comment '活动规则',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
-   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (lucky_draw_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='抽奖活动信息表';
@@ -551,9 +609,11 @@ create table manager
    user_id               varchar(64) default NULL comment '用户id',
    phone                varchar(32) default NULL comment '联系人',
    role_type             varchar(32) default NULL comment '角色',
-   is_deleted            tinyint(1) not null default 0 comment '删除标志',
-   create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
-   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (manager_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='管理员表';
@@ -569,7 +629,11 @@ create table membership_score_daily_details
    exchange_in_num        bigint(20) not null comment '兑入积分数量',
    consume_num           bigint(20) not null comment '消费积分数量',
    balance              bigint(20) not null comment '积分结余',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (membership_score_daily_details_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='会员积分日结明细';
@@ -594,8 +658,10 @@ create table notice
    content              text not null comment '内容',
    operator_user_id       varchar(64) not null comment '操作人ID',
    is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
-   create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (notice_id)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='公告表';
@@ -614,7 +680,11 @@ create table order_address
    receiver_name         varchar(16) not null comment '收货人姓名',
    phone                varchar(16) not null comment '联系人手机号',
    postcode             varchar(12) default NULL comment '邮编',
-   create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (order_address_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='订单地址表';
@@ -628,7 +698,11 @@ create table order_locus
    order_id              bigint(20) not null,
    before_status         tinyint(4) not null comment '变更前状态',
    after_status          tinyint(4) not null comment '变更后状态',
-   create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (order_locus_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='订单轨迹表\r\n';
@@ -657,11 +731,13 @@ create table orders
    payment              int(11) not null comment '实际付款价格',
    freight              int(11) default NULL comment '运费',
    version              int(11) not null default 1,
-   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
-   create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
    delivery_time         timestamp default NULL comment '发货时间',
    confirm_time          timestamp default NULL comment '确认收货时间',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (orders_id),
    unique key unq_order_num (order_num)
 )
@@ -677,8 +753,11 @@ create table orders_extend
    coupon_code           varchar(64) default NULL comment '券码',
    remark               varchar(512) default NULL comment '备注',
    return_time           timestamp default NULL comment '退货时间',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (order_id),
    unique key unq_order_num (order_num)
 )
@@ -702,6 +781,11 @@ create table participation_record
    expenditure          int(11) not null comment '积分消费',
    request_no            varchar(32) not null comment '请求编号',
    whether_winning       tinyint(4) not null comment '是否中奖:0-未中奖 1-中奖',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (participation_record_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='参与记录信息表';
@@ -721,6 +805,11 @@ create table request_flow
    response_result       varchar(2048) not null comment '应答',
    request_time          timestamp not null comment '请求时间',
    remark               varchar(512) comment '备注',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (request_flow_id)
 );
 
@@ -737,9 +826,11 @@ create table resource
    url                  varchar(128),
    method               varchar(16),
    parent_id             bigint(20) default NULL comment '父节点ID',
-   is_deleted            varchar(2) comment '是否删除:0-否,1-是',
-   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间,格式yyyy-mm-dd hh:mi:ss',
-   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '最后更新时间,格式yyyy-mm-dd hh:mi:ss',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (resource_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='权限表';
@@ -754,9 +845,11 @@ create table role
    role_type             varchar(32) comment '角色类型',
    is_valid              varchar(2) comment '是否有效:0-否,1-是',
    remark               varchar(1024) comment '备注',
-   is_deleted            tinyint(1) comment '是否删除:0-否,1-是',
-   create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建时间,格式yyyy-mm-dd hh:mi:ss',
-   update_time          timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '最后更新时间,格式yyyy-mm-dd hh:mi:ss',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (role_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='角色表';
@@ -769,8 +862,11 @@ create table role_resource_relation
    role_resource_relation_id                   bigint(20) unsigned not null auto_increment comment '主键ID',
    role_id               bigint(20) not null comment '角色id',
    resource_id           bigint(20) not null comment '权限id',
-   create_operator       varchar(32) comment '创建操作人',
-   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间,格式yyyy-mm-dd hh:mi:ss',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (role_resource_relation_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='角色权限关系表';
@@ -790,8 +886,11 @@ create table score
    freezing_score        bigint(20) not null comment '冻结积分',
    version              bigint(20) not null comment '版本号，并发乐观锁，初始版本1，更新+1',
    accumulative_score    bigint(20) not null comment '累计积分获取',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (score_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分账户表';
@@ -808,8 +907,11 @@ create table score_auth
    user_id               varchar(64) default NULL comment '用户id',
    phone                varchar(32) default NULL comment '联系人',
    contacts_user         varchar(32) default NULL,
-   is_deleted            tinyint(1) not null default 0 comment '删除标志',
-   create_time           timestamp not null default '2017-01-01 00:00:00' comment '操作时间',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (score_auth_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分权限表';
@@ -838,7 +940,11 @@ create table score_change
    state                tinyint(1) not null default 0 comment '流水状态，0：正常状态，1：被冲正',
    operation_time        timestamp not null comment '操作时间',
    expiration_time       timestamp comment '该笔变更积分过期时间',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (score_change_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分变更表';
@@ -858,7 +964,11 @@ create table score_change_detail
    freezing_score_balance bigint(20) not null comment '冻结积分余额',
    expiration_time       timestamp not null comment '该笔变更积分过期时间',
    flow_type             varchar(32) not null comment '变更类型(income:收入，expenditure:支出,freeze:冻结)',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (score_change_detail_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分变更明细';
@@ -875,9 +985,11 @@ create table score_child
    freezing_score        bigint(20) not null comment '冻结积分',
    version              bigint(20) not null comment '版本号，并发乐观锁，初始版本1，更新+1',
    expiration_time       timestamp not null default '2017-01-01 00:00:00' comment '过期时间',
-   is_deleted            tinyint(1) not null comment '删除标示',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (score_child_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分子表，含有效期处理';
@@ -896,8 +1008,11 @@ create table score_converter_flow
    person_everyday_out_limit bigint(20) default NULL comment '每人每天可兑出限额(可兑换的外币数量)',
    channel_everyday_in_limit bigint(20) default NULL comment '渠道每天可兑入限额(可兑换的外币数量)',
    channel_everyday_out_limit bigint(20) default NULL comment '渠道每天可兑出限额(可兑换的外币数量)',
-   operated_by           varchar(32) not null comment '操作人',
-   operated_time         timestamp not null default '2017-01-01 00:00:00' comment '操作时间',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (score_converter_flow_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分转换规则设置流水';
@@ -915,11 +1030,11 @@ create table score_exchange_flow
    operator_user_id       varchar(64) not null comment '操作人ID',
    state                varchar(32),
    message              varchar(512),
-   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
-   create_by             varchar(64) default NULL comment '创建者',
-   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
-   update_by             varchar(64) default NULL comment '修改者',
    is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (score_exchange_flow_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='积分兑入兑出流水';
@@ -933,7 +1048,11 @@ create table score_settlement
    score_id              bigint(20) not null comment '积分账户id',
    daily_balance         bigint(20) not null comment '日结余额',
    account_day           varchar(12) not null comment '记账日',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (score_settlement_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商家账户积分日结信息表';
@@ -948,8 +1067,11 @@ create table score_user
    phone                varchar(16) comment '用户手机号',
    name                 varchar(32) comment '用户姓名',
    is_valid              tinyint(1) comment '是否有效:0-无效;1-有效',
-   create_time           timestamp default CURRENT_TIMESTAMP comment '创建时间',
-   update_time           timestamp,
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (score_user_id)
 );
 
@@ -974,7 +1096,11 @@ create table settlement
    end_time              timestamp not null default '2017-01-01 00:00:00' comment '结束时间',
    settlement_time       timestamp default NULL comment '结算时间',
    settlement_state      int(11) not null comment '结算状态：0、未结算；1、已结算',
-   create_time           timestamp not null default '2017-01-01 00:00:00' comment '创建时间',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (settlement_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='结算信息表';
@@ -995,7 +1121,9 @@ create table shop
    description          varchar(128) default NULL,
    is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (shop_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='店铺';
@@ -1010,8 +1138,11 @@ create table shopwindow
    img_url               varchar(255) not null comment '图片地址',
    link_url              varchar(255) default NULL comment '链接地址',
    sort                 int(1) default NULL comment '排序',
-   create_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '创建时间',
-   update_time           timestamp default NULL,
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (shopwindow_id)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='橱窗表';
@@ -1025,7 +1156,11 @@ create table user_role_relation
    score_user_id          varchar(64) comment '积分用户Id',
    user_id               varchar(64) comment '用户Id',
    role_id               bigint(20) not null comment '角色id',
-   create_time          timestamp not null default CURRENT_TIMESTAMP comment '创建时间,格式yyyy-mm-dd hh:mi:ss',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (user_role_relation_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户角色关系表';
@@ -1058,7 +1193,11 @@ create table winning_record
    winning_phone         varchar(16) not null comment '中奖手机号',
    state                tinyint(4) not null comment '奖品状态:0-未发放1-已发放2-发放失败',
    version              int(11) not null comment '版本号',
-   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '更新时间',
+   is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
+   create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
+   create_by             varchar(64) default NULL comment '创建人',
+   update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
+   update_by             varchar(64) default NULL comment '修改人',
    primary key (winning_record_id)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='中奖记录信息表';
