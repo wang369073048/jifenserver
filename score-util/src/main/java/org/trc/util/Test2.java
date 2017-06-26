@@ -50,7 +50,6 @@ public class Test2 {
         if(line==null||"".equals(line)){
             return "";
         }
-
         line=String.valueOf(line.charAt(0)).toUpperCase().concat(line.substring(1));
         StringBuffer sb=new StringBuffer();
 
