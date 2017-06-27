@@ -124,7 +124,7 @@ create table activity_prizes
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (activity_prizes_id)
+   primary key (activity_prizes_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='活动奖品信息表';
@@ -150,7 +150,7 @@ create table address
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (address_id)
+   primary key (address_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='地址表';
@@ -172,7 +172,7 @@ create table area
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (area_id)
+   primary key (area_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='省市区表';
@@ -198,7 +198,7 @@ create table banner
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (banner_id)
+   primary key (banner_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='banner表';
@@ -221,7 +221,7 @@ create table banner_content
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (banner_content_id)
+   primary key (banner_content_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='banner内容页';
@@ -246,7 +246,7 @@ create table barrage
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (barrage_id)
+   primary key (barrage_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='弹幕表';
@@ -272,7 +272,7 @@ create table card_coupons
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (card_coupons_id),
-   unique key unq_batch_number (batch_number)
+   unique key unq_batch_number (batch_number),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='卡券信息表';
@@ -297,7 +297,7 @@ create table card_item
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (card_item_id),
-   unique key unq_code (code)
+   unique key unq_code (code),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='卡券明细表';
@@ -319,7 +319,7 @@ create table card_item_abandoned
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (card_item_abandoned_id)
+   primary key (card_item_abandoned_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='废弃卡券明细表';
@@ -347,7 +347,7 @@ create table category
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (category_id)
+   primary key (category_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='类目表';
@@ -370,7 +370,7 @@ create table consumption_summary
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (consumption_summary_id)
+   primary key (consumption_summary_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='消费汇总';
@@ -407,7 +407,7 @@ create table exchange_rate
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (exchange_rate_id)
+   primary key (exchange_rate_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分转换';
@@ -434,7 +434,7 @@ create table exchange_rate_history
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (exchange_rate_history_id)
+   primary key (exchange_rate_history_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分转换';
@@ -480,7 +480,7 @@ create table goods
    update_by             varchar(64) default NULL comment '修改人',
    primary key (goods_id),
    unique key unq_goods_sn (goods_sn),
-   unique key unq_shop_id_barcode (shop_id, barcode)
+   unique key unq_shop_id_barcode (shop_id, barcode),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商品表';
@@ -500,7 +500,7 @@ create table goods_recommend
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (goods_recommend_id)
+   primary key (goods_recommend_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商品推荐表';
@@ -538,7 +538,7 @@ create table goods_snapshot
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (goods_snapshot_id),
-   unique key unq_goods_id_version (goods_id, version)
+   unique key unq_goods_id_version (goods_id, version),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -562,7 +562,7 @@ create table log_information
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (log_information_id)
+   primary key (log_information_id),
    unique key unq_uuid (uuid)
 );
 
@@ -582,7 +582,7 @@ create table logistic_code
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (logistic_code_id)
+   primary key (logistic_code_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8;
@@ -605,7 +605,7 @@ create table logistics
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (logistics_id),
-   unique key unq_order_id (order_id)
+   unique key unq_order_id (order_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='物流信息表';
@@ -634,7 +634,7 @@ create table lucky_draw
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (lucky_draw_id)
+   primary key (lucky_draw_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='抽奖活动信息表';
@@ -655,7 +655,7 @@ create table manager
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (manager_id)
+   primary key (manager_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='管理员表';
@@ -677,7 +677,7 @@ create table membership_score_daily_details
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (membership_score_daily_details_id)
+   primary key (membership_score_daily_details_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='会员积分日结明细';
@@ -707,7 +707,7 @@ create table notice
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (notice_id)
+   primary key (notice_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='公告表';
@@ -732,7 +732,7 @@ create table order_address
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (order_address_id)
+   primary key (order_address_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='订单地址表';
@@ -752,7 +752,7 @@ create table order_locus
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (order_locus_id)
+   primary key (order_locus_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='订单轨迹表\r\n';
@@ -790,7 +790,7 @@ create table orders
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (orders_id),
-   unique key unq_order_num (order_num)
+   unique key unq_order_num (order_num),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='订单表';
@@ -805,14 +805,14 @@ create table orders_extend
    order_num             varchar(64) not null comment '订单编号',
    coupon_code           varchar(64) default NULL comment '券码',
    remark               varchar(512) default NULL comment '备注',
-   return_time           timestamp default NULL comment '退货时间',
+   return_time           timestamp NUll default NULL comment '退货时间',
    is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
    create_time           timestamp not null default CURRENT_TIMESTAMP comment '创建时间',
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (order_id),
-   unique key unq_order_num (order_num)
+   unique key unq_order_num (order_num),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='订单扩展表';
@@ -841,7 +841,7 @@ create table participation_record
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (participation_record_id)
+   primary key (participation_record_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='参与记录信息表';
@@ -867,7 +867,7 @@ create table request_flow
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (request_flow_id)
+   primary key (request_flow_id),
    unique key unq_uuid (uuid)
 );
 
@@ -890,7 +890,7 @@ create table resource
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (resource_id)
+   primary key (resource_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='权限表';
@@ -911,7 +911,7 @@ create table role
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (role_id)
+   primary key (role_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='角色表';
@@ -930,7 +930,7 @@ create table role_resource_relation
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (role_resource_relation_id)
+   primary key (role_resource_relation_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='角色权限关系表';
@@ -956,7 +956,7 @@ create table score
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (score_id)
+   primary key (score_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分账户表';
@@ -979,7 +979,7 @@ create table score_auth
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (score_auth_id)
+   primary key (score_auth_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分权限表';
@@ -1014,7 +1014,7 @@ create table score_change
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (score_change_id)
+   primary key (score_change_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分变更表';
@@ -1040,7 +1040,7 @@ create table score_change_detail
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (score_change_detail_id)
+   primary key (score_change_detail_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分变更明细';
@@ -1063,7 +1063,7 @@ create table score_child
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (score_child_id)
+   primary key (score_child_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分子表，含有效期处理';
@@ -1088,7 +1088,7 @@ create table score_converter_flow
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (score_converter_flow_id)
+   primary key (score_converter_flow_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分转换规则设置流水';
@@ -1112,7 +1112,7 @@ create table score_exchange_flow
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (score_exchange_flow_id)
+   primary key (score_exchange_flow_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='积分兑入兑出流水';
@@ -1132,7 +1132,7 @@ create table score_settlement
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (score_settlement_id)
+   primary key (score_settlement_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商家账户积分日结信息表';
@@ -1153,7 +1153,7 @@ create table score_user
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (score_user_id)
+   primary key (score_user_id),
    unique key unq_uuid (uuid)
 );
 
@@ -1184,7 +1184,7 @@ create table settlement
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (settlement_id)
+   primary key (settlement_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='结算信息表';
@@ -1209,7 +1209,7 @@ create table shop
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (shop_id)
+   primary key (shop_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='店铺';
@@ -1230,7 +1230,7 @@ create table shopwindow
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (shopwindow_id)
+   primary key (shopwindow_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='橱窗表';
@@ -1250,7 +1250,7 @@ create table user_role_relation
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (user_role_relation_id)
+   primary key (user_role_relation_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户角色关系表';
@@ -1289,7 +1289,7 @@ create table winning_record
    create_by             varchar(64) default NULL comment '创建人',
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
-   primary key (winning_record_id)
+   primary key (winning_record_id),
    unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='中奖记录信息表';
