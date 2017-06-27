@@ -106,6 +106,7 @@ drop table if exists winning_record;
 create table activity_prizes
 (
    activity_prizes_id                   bigint(20) unsigned not null auto_increment comment '主键',
+   uuid                  varchar(64) not null comment 'uuid',
    shop_id               bigint(20) not null comment '店铺id',
    lucky_draw_id          bigint(20) not null comment '抽奖活动id',
    goods_id              bigint(20) default NULL comment '奖品id',
@@ -124,6 +125,7 @@ create table activity_prizes
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (activity_prizes_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='活动奖品信息表';
 
@@ -133,6 +135,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='活动奖品信息表';
 create table address
 (
    address_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    user_id               varchar(64) not null comment '用户ID',
    province_code         varchar(32) not null comment '省行政编码',
    city_code             varchar(32) not null comment '城市行政编码',
@@ -148,6 +151,7 @@ create table address
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (address_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='地址表';
 
@@ -156,7 +160,8 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='地址表';
 /*==============================================================*/
 create table area
 (
-   area_id                   bigint(20) not null auto_increment,
+   area_id                   bigint(20) not null auto_increment comment '主键',
+   uuid                  varchar(64) not null comment 'uuid',
    code                 varchar(40) not null,
    province             varchar(40) not null,
    city                 varchar(40) not null,
@@ -168,6 +173,7 @@ create table area
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (area_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='省市区表';
 
@@ -176,7 +182,8 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='省市区表';
 /*==============================================================*/
 create table banner
 (
-   banner_id                   bigint(20) not null,
+   banner_id                   bigint(20) not null auto_increment comment '主键',
+   uuid                  varchar(64) not null comment 'uuid',
    shop_id               bigint(20) not null comment '业务方ID',
    name                 varchar(64) not null comment '名称',
    type                 varchar(32) not null comment '类型: PC|APP',
@@ -192,6 +199,7 @@ create table banner
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (banner_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='banner表';
 
@@ -200,7 +208,8 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='banner表';
 /*==============================================================*/
 create table banner_content
 (
-   banner_content_id                   bigint(20) not null comment '主键标示',
+   banner_content_id                   bigint(20) not null auto_increment comment '主键',
+   uuid                  varchar(64) not null comment 'uuid',
    shop_id               bigint(20) not null comment '业务方ID',
    title                varchar(64) not null comment '标题',
    type                 varchar(32) not null comment '类型: PC|APP',
@@ -213,6 +222,7 @@ create table banner_content
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (banner_content_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='banner内容页';
 
@@ -222,6 +232,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='banner内容页';
 create table barrage
 (
    barrage_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    shop_id               bigint(20) not null comment '商品所属店铺',
    order_id              bigint(20) not null comment '商品名称',
    user_id               varchar(64) not null,
@@ -236,6 +247,7 @@ create table barrage
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (barrage_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='弹幕表';
 
@@ -245,6 +257,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='弹幕表';
 create table card_coupons
 (
    card_coupons_id                   bigint(20) not null auto_increment comment '主键',
+   uuid                  varchar(64) not null comment 'uuid',
    shop_id               bigint(20) not null comment '店铺id',
    coupon_name           varchar(64) not null comment '卡券名称',
    remark               varchar(256) default NULL comment '备注',
@@ -260,6 +273,7 @@ create table card_coupons
    update_by             varchar(64) default NULL comment '修改人',
    primary key (card_coupons_id),
    unique key unq_batch_number (batch_number)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='卡券信息表';
 
@@ -269,6 +283,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='卡券信息表';
 create table card_item
 (
    card_item_id                   bigint(20) unsigned not null auto_increment comment '主键',
+   uuid                  varchar(64) not null comment 'uuid',
    shop_id               bigint(20) not null comment '店铺id',
    batch_number          varchar(32) not null comment '批次号',
    code                 varchar(32) not null comment '券码',
@@ -283,6 +298,7 @@ create table card_item
    update_by             varchar(64) default NULL comment '修改人',
    primary key (card_item_id),
    unique key unq_code (code)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='卡券明细表';
 
@@ -292,6 +308,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='卡券明细表';
 create table card_item_abandoned
 (
    card_item_abandoned_id                   bigint(20) unsigned not null auto_increment comment '主键',
+   uuid                  varchar(64) not null comment 'uuid',
    shop_id               bigint(20) not null comment '店铺id',
    batch_number          varchar(32) not null comment '批次号',
    code                 varchar(32) not null comment '券码',
@@ -303,6 +320,7 @@ create table card_item_abandoned
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (card_item_abandoned_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='废弃卡券明细表';
 
@@ -314,6 +332,7 @@ alter table card_item_abandoned comment '废弃卡券明细表';
 create table category
 (
    category_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    pid                  bigint(20) default NULL,
    code                 varchar(32) default NULL comment '编码',
    category_name         varchar(16) not null comment '类目名称',
@@ -329,6 +348,7 @@ create table category
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (category_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='类目表';
 
@@ -338,6 +358,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='类目表';
 create table consumption_summary
 (
    consumption_summary_id                   bigint(20) not null auto_increment comment '主键',
+   uuid                  varchar(64) not null comment 'uuid',
    user_id               varchar(64) not null comment '唯一用户标示',
    account_day           varchar(12) not null comment '记账日',
    shop_id               bigint(20) default NULL comment '店铺id',
@@ -350,6 +371,7 @@ create table consumption_summary
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (consumption_summary_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='消费汇总';
 
@@ -369,6 +391,7 @@ create unique index unq_user_id_account_day_shop_id on consumption_summary
 create table exchange_rate
 (
    exchange_rate_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    currency             varchar(32) comment '兑换币种',
    shop_id               bigint(20) default NULL comment '店铺id',
    channel_code          varchar(32) not null comment '渠道编码',
@@ -385,6 +408,7 @@ create table exchange_rate
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (exchange_rate_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分转换';
 
@@ -394,6 +418,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分转换';
 create table exchange_rate_history
 (
    exchange_rate_history_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    currency             varchar(32) comment '兑换币种',
    shop_id               bigint(20) default NULL comment '店铺id',
    channel_code          varchar(32) not null comment '渠道编码',
@@ -410,6 +435,7 @@ create table exchange_rate_history
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (exchange_rate_history_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分转换';
 
@@ -419,6 +445,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分转换';
 create table goods
 (
    goods_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    shop_id               bigint(20) not null comment '商品所属店铺',
    category             bigint(20) not null comment '所属类目',
    brand_name            varchar(16) default NULL comment '品牌名称',
@@ -454,6 +481,7 @@ create table goods
    primary key (goods_id),
    unique key unq_goods_sn (goods_sn),
    unique key unq_shop_id_barcode (shop_id, barcode)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商品表';
 
@@ -463,6 +491,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商品表';
 create table goods_recommend
 (
    goods_recommend_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    shop_id               bigint(20) not null comment '店铺ID',
    goods_id              bigint(20) not null comment '商品ID',
    sort                 int(11) default NULL comment '排序',
@@ -472,6 +501,7 @@ create table goods_recommend
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (goods_recommend_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商品推荐表';
 
@@ -481,6 +511,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商品推荐表';
 create table goods_snapshot
 (
    goods_snapshot_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    goods_id              bigint(20) not null comment '商品id',
    shop_id               bigint(20) not null comment '商品所属店铺',
    bar_code              varchar(32),
@@ -508,6 +539,7 @@ create table goods_snapshot
    update_by             varchar(64) default NULL comment '修改人',
    primary key (goods_snapshot_id),
    unique key unq_goods_id_version (goods_id, version)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
@@ -516,7 +548,8 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 /*==============================================================*/
 create table log_information
 (
-   log_information_id                   bigint(20) not null,
+   log_information_id                   bigint(20) not null auto_increment comment '主键',
+   uuid                  varchar(64) not null comment 'uuid',
    entity_type           varchar(16) not null,
    entity_id             varchar(64) not null,
    operation            varchar(32) not null comment '操作类型',
@@ -530,6 +563,7 @@ create table log_information
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (log_information_id)
+   unique key unq_uuid (uuid)
 );
 
 alter table log_information comment '日志信息表';
@@ -539,7 +573,8 @@ alter table log_information comment '日志信息表';
 /*==============================================================*/
 create table logistic_code
 (
-   logistic_code_id                   bigint(20) not null auto_increment,
+   logistic_code_id                   bigint(20) not null auto_increment comment '主键',
+   uuid                  varchar(64) not null comment 'uuid',
    company_code          varchar(16) not null,
    company_name          varchar(32) not null,
    is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
@@ -548,6 +583,7 @@ create table logistic_code
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (logistic_code_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 
@@ -557,6 +593,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8;
 create table logistics
 (
    logistics_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    order_id              bigint(20) not null,
    company_name          varchar(64) default NULL comment '物流公司名称',
    shipper_code          varchar(64) not null comment '物流公司编码',
@@ -569,6 +606,7 @@ create table logistics
    update_by             varchar(64) default NULL comment '修改人',
    primary key (logistics_id),
    unique key unq_order_id (order_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='物流信息表';
 
@@ -578,6 +616,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='物流信息表';
 create table lucky_draw
 (
    lucky_draw_id                   bigint(20) unsigned not null auto_increment comment '主键',
+   uuid                  varchar(64) not null comment 'uuid',
    shop_id               bigint(20) not null comment '店铺id',
    platform             varchar(16) not null comment '平台:PC|APP',
    activity_name         varchar(64) not null comment '活动名称',
@@ -596,6 +635,7 @@ create table lucky_draw
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (lucky_draw_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='抽奖活动信息表';
 
@@ -605,6 +645,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='抽奖活动信息表';
 create table manager
 (
    manager_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    shop_id               bigint(20) default NULL comment '店铺id',
    user_id               varchar(64) default NULL comment '用户id',
    phone                varchar(32) default NULL comment '联系人',
@@ -615,6 +656,7 @@ create table manager
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (manager_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='管理员表';
 
@@ -624,6 +666,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='管理员表';
 create table membership_score_daily_details
 (
    membership_score_daily_details_id                   bigint(20) not null auto_increment comment '主键',
+   uuid                  varchar(64) not null comment 'uuid',
    user_id               varchar(64) not null comment '唯一用户标示',
    account_day           varchar(12) not null comment '记账日',
    exchange_in_num        bigint(20) not null comment '兑入积分数量',
@@ -635,6 +678,7 @@ create table membership_score_daily_details
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (membership_score_daily_details_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='会员积分日结明细';
 
@@ -653,6 +697,7 @@ create unique index unq_user_id_account_day on membership_score_daily_details
 create table notice
 (
    notice_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    title                varchar(128) not null comment '标题',
    type                 varchar(16) not null comment '类型',
    content              text not null comment '内容',
@@ -663,6 +708,7 @@ create table notice
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (notice_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='公告表';
 
@@ -672,6 +718,7 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='公告表';
 create table order_address
 (
    order_address_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    order_id              bigint(20) not null,
    province_code         varchar(32) not null comment '省行政编码',
    city_code             varchar(32) not null comment '城市行政编码',
@@ -686,6 +733,7 @@ create table order_address
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (order_address_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='订单地址表';
 
@@ -695,6 +743,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='订单地址表';
 create table order_locus
 (
    order_locus_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    order_id              bigint(20) not null,
    before_status         tinyint(4) not null comment '变更前状态',
    after_status          tinyint(4) not null comment '变更后状态',
@@ -704,6 +753,7 @@ create table order_locus
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (order_locus_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='订单轨迹表\r\n';
 
@@ -713,6 +763,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='订单轨迹表\r\n';
 create table orders
 (
    orders_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    shop_id               bigint(20) not null comment '店铺id',
    user_id               varchar(64) not null,
    username             varchar(64) default NULL,
@@ -740,6 +791,7 @@ create table orders
    update_by             varchar(64) default NULL comment '修改人',
    primary key (orders_id),
    unique key unq_order_num (order_num)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='订单表';
 
@@ -749,6 +801,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='订单表';
 create table orders_extend
 (
    order_id              bigint(20) not null comment '主键',
+   uuid                  varchar(64) not null comment 'uuid',
    order_num             varchar(64) not null comment '订单编号',
    coupon_code           varchar(64) default NULL comment '券码',
    remark               varchar(512) default NULL comment '备注',
@@ -760,6 +813,7 @@ create table orders_extend
    update_by             varchar(64) default NULL comment '修改人',
    primary key (order_id),
    unique key unq_order_num (order_num)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='订单扩展表';
 
@@ -769,6 +823,7 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='订单扩展表';
 create table participation_record
 (
    participation_record_id                   bigint(20) unsigned not null auto_increment comment '主键',
+   uuid                  varchar(64) not null comment 'uuid',
    shop_id               bigint(20) not null comment '店铺id',
    user_id               varchar(64) not null comment '用户id',
    lucky_draw_id          bigint(20) not null comment '抽奖活动id',
@@ -787,6 +842,7 @@ create table participation_record
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (participation_record_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='参与记录信息表';
 
@@ -795,7 +851,8 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='参与记录信息表';
 /*==============================================================*/
 create table request_flow
 (
-   request_flow_id                   bigint(20) not null comment '主键',
+   request_flow_id                   bigint(20) unsigned not null auto_increment comment '主键',
+   uuid                  varchar(64) not null comment 'uuid',
    requester            varchar(64) not null comment '请求发起方',
    responder            varchar(64) not null comment '请求响应方',
    type                 varchar(16) not null comment '类型',
@@ -811,6 +868,7 @@ create table request_flow
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (request_flow_id)
+   unique key unq_uuid (uuid)
 );
 
 alter table request_flow comment '请求流水表';
@@ -821,6 +879,7 @@ alter table request_flow comment '请求流水表';
 create table resource
 (
    resource_id                   bigint(20) unsigned not null auto_increment comment '主键ID',
+   uuid                  varchar(64) not null comment 'uuid',
    code                 bigint(20) default NULL comment '权限编码',
    name                 varchar(32),
    url                  varchar(128),
@@ -832,6 +891,7 @@ create table resource
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (resource_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='权限表';
 
@@ -841,6 +901,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='权限表';
 create table role
 (
    role_id                   bigint(20) unsigned not null auto_increment comment '主键ID',
+   uuid                  varchar(64) not null comment 'uuid',
    name                 varchar(32) comment '名称',
    role_type             varchar(32) comment '角色类型',
    is_valid              varchar(2) comment '是否有效:0-否,1-是',
@@ -851,6 +912,7 @@ create table role
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (role_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='角色表';
 
@@ -860,6 +922,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='角色表';
 create table role_resource_relation
 (
    role_resource_relation_id                   bigint(20) unsigned not null auto_increment comment '主键ID',
+   uuid                  varchar(64) not null comment 'uuid',
    role_id               bigint(20) not null comment '角色id',
    resource_id           bigint(20) not null comment '权限id',
    is_deleted            tinyint(1) not null comment '0 正常 ;1 已删除',
@@ -868,6 +931,7 @@ create table role_resource_relation
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (role_resource_relation_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='角色权限关系表';
 
@@ -877,6 +941,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='角色权限关系
 create table score
 (
    score_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    user_id               varchar(64) not null comment '唯一用户标示',
    type                 varchar(16) not null comment '账户类型',
    source               varchar(32) not null comment '来源系统',
@@ -892,6 +957,7 @@ create table score
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (score_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分账户表';
 
@@ -901,6 +967,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分账户表';
 create table score_auth
 (
    score_auth_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    channel_code          varchar(32) not null comment '渠道编码',
    exchange_currency     varchar(32) default NULL comment '外币',
    shop_id               bigint(20) default NULL comment '店铺id',
@@ -913,6 +980,7 @@ create table score_auth
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (score_auth_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分权限表';
 
@@ -922,6 +990,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分权限表';
 create table score_change
 (
    score_change_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    user_id               varchar(64) not null comment '唯一用户标示',
    shop_id               bigint(20) default NULL comment '店铺id',
    user_name             varchar(16) not null comment '用户名',
@@ -946,6 +1015,7 @@ create table score_change
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (score_change_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分变更表';
 
@@ -955,6 +1025,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分变更表';
 create table score_change_detail
 (
    score_change_detail_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    user_id               varchar(64) not null comment '唯一用户标示',
    order_num             varchar(64) not null comment '单据编号',
    score_id              bigint(20) not null comment '积分账户id',
@@ -970,6 +1041,7 @@ create table score_change_detail
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (score_change_detail_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分变更明细';
 
@@ -979,6 +1051,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分变更明细';
 create table score_child
 (
    score_child_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    score_id              bigint(20) not null comment '积分账户标示',
    user_id               varchar(64) not null comment '唯一用户标示',
    score                bigint(20) not null comment '积分',
@@ -991,6 +1064,7 @@ create table score_child
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (score_child_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分子表，含有效期处理';
 
@@ -1000,6 +1074,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分子表，含有效期处理';
 create table score_converter_flow
 (
    score_converter_flow_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    converter_id          bigint(20) not null comment '规则id',
    amount               int(11) not null comment '兑换金额',
    score                int(11) not null comment '积分',
@@ -1014,6 +1089,7 @@ create table score_converter_flow
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (score_converter_flow_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分转换规则设置流水';
 
@@ -1023,6 +1099,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='积分转换规则设置流水';
 create table score_exchange_flow
 (
    score_exchange_flow_id                   bigint(20) not null auto_increment comment '主键',
+   uuid                  varchar(64) not null comment 'uuid',
    order_num             varchar(32) comment '订单号',
    amount               bigint(11) not null comment '兑换金额',
    score                bigint(11) not null comment '积分',
@@ -1036,6 +1113,7 @@ create table score_exchange_flow
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (score_exchange_flow_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='积分兑入兑出流水';
 
@@ -1045,6 +1123,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='积分兑入兑�
 create table score_settlement
 (
    score_settlement_id                   bigint(20) not null auto_increment comment '主键标示',
+   uuid                  varchar(64) not null comment 'uuid',
    score_id              bigint(20) not null comment '积分账户id',
    daily_balance         bigint(20) not null comment '日结余额',
    account_day           varchar(12) not null comment '记账日',
@@ -1054,6 +1133,7 @@ create table score_settlement
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (score_settlement_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商家账户积分日结信息表';
 
@@ -1062,7 +1142,8 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='商家账户积分日结信息表';
 /*==============================================================*/
 create table score_user
 (
-   score_user_id                   bigint(20) not null comment '主键',
+   score_user_id                   bigint(20) not null auto_increment comment '主键',
+   uuid                  varchar(64) not null comment 'uuid',
    user_id               varchar(64) comment '用户Id',
    phone                varchar(16) comment '用户手机号',
    name                 varchar(32) comment '用户姓名',
@@ -1073,6 +1154,7 @@ create table score_user
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (score_user_id)
+   unique key unq_uuid (uuid)
 );
 
 alter table score_user comment '用户表';
@@ -1083,6 +1165,7 @@ alter table score_user comment '用户表';
 create table settlement
 (
    settlement_id                   bigint(20) not null auto_increment comment '主键',
+   uuid                  varchar(64) not null comment 'uuid',
    shop_id               bigint(20) not null comment '业务方ID',
    balance              bigint(20) default NULL comment '余额',
    previous_balance      bigint(20) default NULL comment '前一日余额',
@@ -1102,6 +1185,7 @@ create table settlement
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (settlement_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='结算信息表';
 
@@ -1110,7 +1194,8 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='结算信息表';
 /*==============================================================*/
 create table shop
 (
-   shop_id                   bigint(20) not null auto_increment comment '主键标示',
+   shop_id                   bigint(20) unsigned not null auto_increment comment '主键id',
+   uuid                  varchar(64) not null comment 'uuid',
    phone                varchar(32) default NULL comment '联系人',
    warn_phone            varchar(32) comment '预警手机号',
    user_id               varchar(64) default NULL comment '店铺所有者',
@@ -1125,6 +1210,7 @@ create table shop
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (shop_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='店铺';
 
@@ -1133,7 +1219,8 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='店铺';
 /*==============================================================*/
 create table shopwindow
 (
-   shopwindow_id                   bigint(20) not null auto_increment comment '主键标示',
+   shopwindow_id                   bigint(20) unsigned not null auto_increment comment '主键id',
+   uuid                  varchar(64) not null comment 'uuid',
    shop_id               bigint(20) not null comment '所属店铺',
    img_url               varchar(255) not null comment '图片地址',
    link_url              varchar(255) default NULL comment '链接地址',
@@ -1144,6 +1231,7 @@ create table shopwindow
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (shopwindow_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='橱窗表';
 
@@ -1153,6 +1241,7 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='橱窗表';
 create table user_role_relation
 (
    user_role_relation_id                   bigint(20) unsigned not null auto_increment comment '主键id',
+   uuid                  varchar(64) not null comment 'uuid',
    score_user_id          varchar(64) comment '积分用户Id',
    user_id               varchar(64) comment '用户Id',
    role_id               bigint(20) not null comment '角色id',
@@ -1162,6 +1251,7 @@ create table user_role_relation
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (user_role_relation_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户角色关系表';
 
@@ -1171,6 +1261,7 @@ ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_bin COMMENT='用户角色关系
 create table winning_record
 (
    winning_record_id                   bigint(20) unsigned not null auto_increment comment '主键',
+   uuid                  varchar(64) not null comment 'uuid',
    shop_id               bigint(20) not null comment '店铺id',
    user_id               varchar(64) not null comment '用户id',
    lucky_draw_id          bigint(20) not null comment '抽奖活动id',
@@ -1199,6 +1290,7 @@ create table winning_record
    update_time           timestamp not null default CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP comment '修改时间',
    update_by             varchar(64) default NULL comment '修改人',
    primary key (winning_record_id)
+   unique key unq_uuid (uuid)
 )
 ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='中奖记录信息表';
 
