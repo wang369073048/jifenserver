@@ -14,7 +14,8 @@ import java.util.Random;
 public class CJTest {
 
     public static void main(String[] args) {
-        int random = 4249;
+        //int random = new Random().nextInt(10000);
+        int random = 9999;
         System.out.println(random);
         int prizeRate = 0;// 中奖率
         List<ActivityPrizesDO> list = new ArrayList<>();
