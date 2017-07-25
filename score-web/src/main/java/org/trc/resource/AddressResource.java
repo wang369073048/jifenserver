@@ -1,26 +1,23 @@
 package org.trc.resource;
 
-import com.alibaba.fastjson.JSONObject;
-import org.hibernate.validator.constraints.NotEmpty;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.trc.biz.impl.consumer.AddressBiz;
-import org.trc.constants.ScoreConstants;
 import org.trc.domain.consumer.Address;
-import org.trc.interceptor.Admin;
-import org.trc.util.CommonConstants;
-import org.trc.util.CustomAck;
-import org.trc.util.TxJerseyTools;
 
-import javax.ws.rs.FormParam;
+
+
+
+
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
+
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.Calendar;
+
 import java.util.Date;
 
 
@@ -37,7 +34,6 @@ public class AddressResource {
 
     @GET
     @Path("address")
-    @Admin
     public Response test(){
         Address address = new Address();
         address.setUserId("201512040929176188868d2365cd444ca833046f944178d97");

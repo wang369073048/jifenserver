@@ -13,6 +13,7 @@
         <property name="locations">
             <list>
                 <value>classpath:config/dev/score-jdbc.properties</value>
+                <value>classpath:config/dev/funds-business-mq.properties</value>
             </list>
         </property>
         <property name="fileEncoding">

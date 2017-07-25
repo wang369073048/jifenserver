@@ -1,0 +1,48 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:rabbit="http://www.springframework.org/schema/rabbit"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+    http://www.springframework.org/schema/rabbit
+    http://www.springframework.org/schema/rabbit/spring-rabbit-1.0.xsd">
+
+    <description>rabbitmq 连接服务配置</description>
+    <bean id="connectionFactory"
+          class="org.springframework.amqp.rabbit.connection.CachingConnectionFactory">
+        <property name="host" value="${md.mq.host}"></property>
+        <property name="port" value="${md.mq.port}"></property>
+        <property name="username" value="${md.mq.username}"/>
+        <property name="password" value="${md.mq.password}"/>
+        <property name="publisherConfirms" value="true"/>
+        <property name="publisherReturns" value="true"/>
+        <property name="virtualHost" value="${mq.vhost}"/>
+    </bean>
+    <!-- 连接配置 -->
+    <!--<rabbit:connection-factory id="connectionFactory" host="${md.mq.host}" username="${md.mq.username}"-->
+    <!--password="${md.mq.password}" port="${md.mq.port}" virtual-host="${mq.vhost}"/>-->
+    <rabbit:admin connection-factory="connectionFactory"/>
+
+    <!--声明一个队列 durable:是否持久化,auto_delete: 当所有消费客户端连接断开后，是否自动删除队列,exclusive: 仅创建者可以使用的私有队列，断开后自动删除-->
+    <rabbit:queue  id ="sn_queue" name="${sn.mq.queue}" durable="true" auto-delete="false" exclusive="false"/>
+
+    <!--交换机定义-->
+    <rabbit:direct-exchange name="${sn.mq.exchange}" durable="true" auto-delete="false">
+        <rabbit:bindings>
+            <rabbit:binding queue="sn_queue" key="${sn.mq.queue}"/>
+        </rabbit:bindings>
+    </rabbit:direct-exchange>
+
+    <!-- spring template声明-->
+    <rabbit:template exchange="${sn.mq.exchange}" id="amqpTemplate" connection-factory="connectionFactory"
+                     encoding="UTF-8" message-converter="jsonMessageConverter" />
+    <!-- 消息对象json转换类 -->
+    <bean id="jsonMessageConverter" class="org.springframework.amqp.support.converter.SerializerMessageConverter"/>
+
+    <!-- 消息接收者 -->
+    <bean id="queueListenter" class="org.trc.mq.QueueListenter"></bean>
+    <rabbit:listener-container connection-factory="connectionFactory" acknowledge="manual" concurrency="${sn.mq.concurrency}"
+                               message-converter="jsonMessageConverter"  prefetch="${sn.mq.prefetch}">
+        <!--queues：监听的队列，多个的话用逗号（,）分隔-->
+        <rabbit:listener queues="sn_queue" ref="queueListenter" method="onMessage"/>
+    </rabbit:listener-container>
+</beans>
