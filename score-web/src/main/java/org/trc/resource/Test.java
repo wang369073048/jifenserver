@@ -17,7 +17,7 @@ public class Test {
         List<Student> list = new ArrayList<Student>();
         Student student = new Student();
         student.setAge("12");
-
+        System.out.println("master commit1");
         Student student2 = new Student();
         student2.setAge("13");
         list.add(student);
