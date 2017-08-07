@@ -25,5 +25,6 @@ public class Test {
         System.out.println(JSONObject.toJSONString(list));
 
         System.out.println("test1 commit1");
+        System.out.println("test2 commit2");
     }
 }
